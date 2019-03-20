@@ -1,0 +1,29 @@
+== CLIENT ==
+
+Controller:
+- Fonction keyDownSearchBar(e)
+	=> Nettoyer la div "autocompletionResults", faire getAutocompletionResults() et mettre le résultat de la fonction dans la div "autocompletionResults"
+	=> Si le keyCode "e" correspond à celui de la toucher entrer, alors on execute openTabsResult(search)
+- Fonction openTabsResult(search)
+	=> Ouvre les onglets des moteurs de recherches en utilisant l'argument "search"
+- Fonction getAutocompletionResults(search)
+	=> Faire load() - ou AJAX - pour récupérer le JSON d'une API qui fournit une autocompletion (en fonction de l'argument "search") - API utilisé: qwant
+	=> Génerer des objets HTML pour afficher le contenu de l'autocompletion en fonction du résultat du JSON récupérer précedemment
+		-> L'objet contiendra un evenement "onClick" qui executera la fonction openTabsResult() avec, comme argument de recherche, la prédiction donné
+		-> L'objet sera sous forme d'un div qui contiendra un texte de la prediction 
+	=> Retourner la liste des objets générer précedemment
+
+Model:
+- Liste des URL des moteurs de recherches
+
+View:
+- Textbox avec comme id "searchBar" (il permettra de faire les recherches)
+	=> Créer un evenement "keydown" qui executera la fonction "keyDownSearchBar(e)"
+	=> Rajouter dans le placeholder "Rechercher..."
+- Div vide avec comme id "autocompletionResults" (il affichera les résultats de la prédiction)
+	=> Elle doit être collé à la textbox
+
+
+== SERVEUR ==
+
+Il n'y a rien du côté serveur.
