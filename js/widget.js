@@ -90,6 +90,8 @@ class SearchEngineController extends WidgetController {
 			let div = document.createElement("div"), text = document.createElement("p");
 
 			div.style.cursor = "pointer";
+			div.style.paddingLeft = "5px";
+			div.style.paddingRight = "5px";
 			text.innerText = jsonParsed[1][i];
 			div.appendChild(text);
 
