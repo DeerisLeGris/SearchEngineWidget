@@ -81,17 +81,15 @@ class SearchEngineController extends WidgetController {
 
 	async getAutocompletionResults(search) {
 		let json = await this.mvc.main.dom("https://api.qwant.com/api/suggest/?q=" + search + "&client=opensearch&lang=fr_fr");
-		console.log(atob(json.response.dom));
 		//let json = await SearchEngine.send("getQwantApi", {data: search});
 		//let json = await SearchEngine.send("getQwantApi", {data: search});
 		let jsonParsed = JSON.parse(atob(json.response.dom));
 		let results = [];
-		console.log(jsonParsed);
 
 		for(let i = 0; i < jsonParsed[1].length; i++) {
 			let div = document.createElement("div"), text = document.createElement("p");
 
-			console.log(jsonParsed[1][i]);
+			div.style.cursor = "crosshair";
 			text.innerText = jsonParsed[1][i];
 			div.appendChild(text);
 
