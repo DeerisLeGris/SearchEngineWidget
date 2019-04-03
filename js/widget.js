@@ -59,13 +59,13 @@ class SearchEngineController extends WidgetController {
 
 		//PROBLEME AVEC L'API (cross-domain interdit)
 		
-		var autocompletion = await this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value);
-		this.try.mvc.view.autocompletionResults.innerHTML = "";
+		await this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value);
+		/*this.try.mvc.view.autocompletionResults.innerHTML = "";
 		console.log("Length: " + autocompletion.length);
 		console.log(autocompletion);
 		for(let i = 0; i < autocompletion.length; i++) {
 			this.try.mvc.view.autocompletionResults.appendChild(autocompletion[i]);
-		}	
+		}*/
 
 
 		if(e.keyCode == 13) //Si on appuie sur entrer...
@@ -99,7 +99,10 @@ class SearchEngineController extends WidgetController {
 			results.push(div);
 		}
 
-		return results;
+		this.try.mvc.view.autocompletionResults.innerHTML = "";
+		for(let i = 0; i < results.length; i++) {
+			this.try.mvc.view.autocompletionResults.appendChild(results[i]);
+		}
 	}
 
 	//Source: https://stackoverflow.com/questions/8567114/how-to-make-an-ajax-call-without-jquery
