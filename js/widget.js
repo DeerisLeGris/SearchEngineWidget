@@ -60,13 +60,14 @@ class SearchEngineController extends WidgetController {
 		//PROBLEME AVEC L'API (cross-domain interdit)
 		
 		var that = this;
-		var autocompletion = this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value).then(function() 
+		var autocompletion = this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value)
+		autocompletion.then(function(result) 
 		{
 			that.try.mvc.view.autocompletionResults.innerHTML = "";
-			console.log("Length: " + autocompletion.length);
-			console.log(autocompletion);
-			for(let i = 0; i < autocompletion.length; i++) {
-				that.try.mvc.view.autocompletionResults.appendChild(autocompletion[i]);
+			console.log("Length: " + result.length);
+			console.log(result);
+			for(let i = 0; i < result.length; i++) {
+				that.try.mvc.view.autocompletionResults.appendChild(result[i]);
 			}
 		});		
 
