@@ -79,7 +79,7 @@ class SearchEngineController extends WidgetController {
 	}
 
 	getAutocompletionResults(search) {
-		let json = await SearchEngine.myWidget.send("getQwantApi", {data: search});
+		let json = await SearchEngine.send("getQwantApi", {data: search});
 		let jsonParsed = JSON.parse(json);
 		let results = [];
 		
