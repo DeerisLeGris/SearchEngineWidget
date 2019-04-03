@@ -55,7 +55,7 @@ class SearchEngineController extends WidgetController {
 		super.setUp();
 	}
 
-	keyDownSearchBar(e) {
+	async keyDownSearchBar(e) {
 
 		//PROBLEME AVEC L'API (cross-domain interdit)
 		
