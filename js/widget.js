@@ -59,14 +59,15 @@ class SearchEngineController extends WidgetController {
 
 		//PROBLEME AVEC L'API (cross-domain interdit)
 		
-		let autocompletion = this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value);
-		this.try.mvc.view.autocompletionResults.innerHTML = "";
-		console.log("Length: " + autocompletion.length);
-		console.log(autocompletion);
-		for(let i = 0; i < autocompletion.length; i++) {
-			this.try.mvc.view.autocompletionResults.appendChild(autocompletion[i]);
-		}
-
+		this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value).then(function(autocompletion) 
+		{
+			this.try.mvc.view.autocompletionResults.innerHTML = "";
+			console.log("Length: " + autocompletion.length);
+			console.log(autocompletion);
+			for(let i = 0; i < autocompletion.length; i++) {
+				this.try.mvc.view.autocompletionResults.appendChild(autocompletion[i]);
+			}
+		});		
 
 
 		if(e.keyCode == 13) //Si on appuie sur entrer...
