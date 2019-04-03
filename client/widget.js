@@ -1,6 +1,6 @@
 class SearchEngine extends Widget {
-    constructor(app) {
-		super(SearchEngineModel, SearchEngineView, SearchEngineController, app);
+    constructor(id, app) {
+		super(id, SearchEngineModel, SearchEngineView, SearchEngineController, app);
 	}
 	
 	setUp() {
@@ -78,8 +78,10 @@ class SearchEngineController extends WidgetController {
 		}
 	}
 
-	getAutocompletionResults(search) {
-		let json = await SearchEngine.send("getQwantApi", {data: search});
+	async getAutocompletionResults(search) {
+		let json = await this.mvc.main.dom("https://api.qwant.com/api/suggest/?q=" + search + "&client=opensearch&lang=fr_fr");
+		//let json = await SearchEngine.send("getQwantApi", {data: search});
+		//let json = await SearchEngine.send("getQwantApi", {data: search});
 		let jsonParsed = JSON.parse(json);
 		let results = [];
 		
