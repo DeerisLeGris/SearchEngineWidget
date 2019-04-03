@@ -95,8 +95,7 @@ class SearchEngineController extends WidgetController {
 			text.innerText = jsonParsed[1][i];
 			div.appendChild(text);
 
-			//div.addEventListener("click", event => { this.try.mvc.controller.openTabsResults(jsonParsed[1][i]) });
-			Events.on(this.try.div, "click", event => this.try.mvc.controller.openTabsResults(jsonParsed[1][i]));
+			div.addEventListener("click", event => { this.try.openTabsResults(jsonParsed[1][i]) });
 			results.push(div);
 		}
 
