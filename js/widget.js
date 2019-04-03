@@ -60,13 +60,6 @@ class SearchEngineController extends WidgetController {
 		//PROBLEME AVEC L'API (cross-domain interdit)
 		
 		await this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value);
-		/*this.try.mvc.view.autocompletionResults.innerHTML = "";
-		console.log("Length: " + autocompletion.length);
-		console.log(autocompletion);
-		for(let i = 0; i < autocompletion.length; i++) {
-			this.try.mvc.view.autocompletionResults.appendChild(autocompletion[i]);
-		}*/
-
 
 		if(e.keyCode == 13) //Si on appuie sur entrer...
 			this.try.openTabsResults(this.try.mvc.view.searchBar.value);
@@ -81,8 +74,6 @@ class SearchEngineController extends WidgetController {
 
 	async getAutocompletionResults(search) {
 		let json = await this.mvc.main.dom("https://api.qwant.com/api/suggest/?q=" + search + "&client=opensearch&lang=fr_fr");
-		//let json = await SearchEngine.send("getQwantApi", {data: search});
-		//let json = await SearchEngine.send("getQwantApi", {data: search});
 		let jsonParsed = JSON.parse(atob(json.response.dom));
 		let results = [];
 
@@ -105,25 +96,4 @@ class SearchEngineController extends WidgetController {
 		}
 	}
 
-	//Source: https://stackoverflow.com/questions/8567114/how-to-make-an-ajax-call-without-jquery
-	/*returnXMLDoc(url) {
-		var xmlhttp = new XMLHttpRequest();
-
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-			if (xmlhttp.status == 200) {
-				return xmlhttp.responseText;
-			}
-			else if (xmlhttp.status == 400) {
-				return 'Erreur 400';
-			}
-			else {
-				return 'Oops !';
-			}
-			}
-		};
-
-		xmlhttp.open("GET", url, true);
-		xmlhttp.send();
-	}*/
 }
