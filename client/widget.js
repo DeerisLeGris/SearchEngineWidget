@@ -37,6 +37,7 @@ class SearchEngineView extends WidgetView {
         this.try.searchBar = HH.create("input");
         this.try.searchBar.setAttribute("type", "text");
         this.try.searchBar.setAttribute("placeholder", "Rechercher...");
+		SS.style(this.searchBar, {"width": "85%", "border-radius": "10px", "padding": "2px", "margin": "5px"});
 		Events.on(this.try.searchBar, "keydown", event => this.try.mvc.controller.keyDownSearchBar(event));
         this.try.stage.appendChild(this.try.searchBar);
 
@@ -58,11 +59,13 @@ class SearchEngineController extends WidgetController {
 
 		//PROBLEME AVEC L'API (cross-domain interdit)
 		
-		/*let autocompletion = this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value);
+		let autocompletion = this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value);
 		this.try.mvc.view.autocompletionResults.innerHTML = "";
 		for(let i = 0; i < autocompletion.length; i++) {
 			this.try.mvc.view.autocompletionResults.appendChild(autocompletion[i]);
-		}*/
+		}
+
+
 
 		if(e.keyCode == 13) //Si on appuie sur entrer...
 			this.try.openTabsResults(this.try.mvc.view.searchBar.value);
@@ -76,7 +79,7 @@ class SearchEngineController extends WidgetController {
 	}
 
 	getAutocompletionResults(search) {
-		let json = this.try.returnXMLDoc("https://api.qwant.com/api/suggest/?q=" + search + "&client=opensearch&lang=fr_fr");
+		let json = await SearchEngine.myWidget.send("getQwantApi", {data: search});
 		let jsonParsed = JSON.parse(json);
 		let results = [];
 		
@@ -94,7 +97,7 @@ class SearchEngineController extends WidgetController {
 	}
 
 	//Source: https://stackoverflow.com/questions/8567114/how-to-make-an-ajax-call-without-jquery
-	returnXMLDoc(url) {
+	/*returnXMLDoc(url) {
 		var xmlhttp = new XMLHttpRequest();
 
 		xmlhttp.onreadystatechange = function() {
@@ -113,5 +116,5 @@ class SearchEngineController extends WidgetController {
 
 		xmlhttp.open("GET", url, true);
 		xmlhttp.send();
-	}
+	}*/
 }
