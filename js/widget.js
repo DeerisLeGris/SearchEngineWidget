@@ -61,6 +61,8 @@ class SearchEngineController extends WidgetController {
 		
 		let autocompletion = this.try.getAutocompletionResults(this.try.mvc.view.searchBar.value);
 		this.try.mvc.view.autocompletionResults.innerHTML = "";
+		console.log("Length: " + autocompletion.length);
+		console.log(autocompletion);
 		for(let i = 0; i < autocompletion.length; i++) {
 			this.try.mvc.view.autocompletionResults.appendChild(autocompletion[i]);
 		}
