@@ -85,10 +85,12 @@ class SearchEngineController extends WidgetController {
 		//let json = await SearchEngine.send("getQwantApi", {data: search});
 		let jsonParsed = JSON.parse(atob(json.response.dom));
 		let results = [];
-		
+		console.log(jsonParsed);
+
 		for(let i = 0; i < jsonParsed[1].length; i++) {
 			let div = document.createElement("div"), text = document.createElement("p");
 
+			console.log(jsonParsed[1][i]);
 			text.innerText = jsonParsed[1][i];
 			div.appendChild(text);
 
